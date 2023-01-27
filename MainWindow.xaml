@@ -5,8 +5,98 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pet_Project_1_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Search Equation Root"
+        Height="230" Width="415" ResizeMode="NoResize">
+    <Grid x:Name="MainGrid" Background="white">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="Buttons_Grid" Grid.Row="0" Grid.Column="0" Margin="10,0,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button x:Name="Solve_Button" Content="Solve" FontFamily="Bahnschrift" FontSize="16" Background="#fff9cc" BorderThickness="0.4"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Click="Solve_Button_Click"
+                    />
+
+            <Button x:Name="Clear_Button" Content="Clear" FontFamily="Bahnschrift" FontSize="16" Background="#fff9cc" BorderThickness="0.4"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Click="Clear_Button_Click"
+                    />
+
+            <Button x:Name="Close_Button" Content="Close" FontFamily="Bahnschrift" FontSize="16" Background="#fff9cc" BorderThickness="0.4"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" Click="Close_Button_Click"
+                    />
+        </Grid>
+
+        <Grid x:Name="Labels_Grid" Grid.Column="1" Grid.Row="0" Margin="10,0,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Left" FontFamily="Bahnschrift" FontSize="12" Grid.Row="0" Background="#bbddff"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                   />
+
+            <Label Content="Right" FontFamily="Bahnschrift" FontSize="12" Grid.Row="1" Background="#bbddff"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                   />
+
+            <Label Content="Accuracy" FontFamily="Bahnschrift" FontSize="12" Grid.Row="2" Background="#bbddff"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                   />
+
+            <Label Content="Root" FontFamily="Bahnschrift" FontSize="12" Grid.Row="3" Foreground="Green" Background="#b9efb9"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                   />
+
+            <Label Content="Iterations" FontFamily="Bahnschrift" FontSize="12" Grid.Row="4" Foreground="Green" Background="#b9efb9"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                   />
+
+        </Grid>
+
+        <Grid x:Name="TexBoxes_Grid" Grid.Column="2" Grid.Row="0" Margin="10,0,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="Left_TextBox" FontFamily="Bahnschrift" FontSize="12" Margin="0,5,0,5" Grid.Row="0"/>
+            <TextBox x:Name="RIght_TextBox" FontFamily="Bahnschrift" FontSize="12" Margin="0,5,0,5" Grid.Row="1"/>
+            <TextBox x:Name="Accuracy_TextBox" FontFamily="Bahnschrift" FontSize="12" Margin="0,5,0,5" Grid.Row="2"/>
+            <TextBox x:Name="Root_TextBox" FontFamily="Bahnschrift" FontSize="12" Margin="0,5,0,5" Grid.Row="3"/>
+            <TextBox x:Name="Iterations_TextBox" FontFamily="Bahnschrift" FontSize="12" Margin="0,5,0,5" Grid.Row="4"/>
+        </Grid>
+
         
+        <Label Content="Methods" FontFamily="Bahnschrift" FontSize="16"
+               Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" 
+               Grid.Column="0" Grid.Row="1"/>
+
+        <ComboBox x:Name="Method_ComboBox" Margin="5,5,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Bahnschrift" FontSize="12" Grid.Row="1" Grid.Column="1" SelectedIndex="-1" SelectionChanged="Method_ComboBox_SelectionChanged">
+            <ComboBoxItem Content="Halving"/>
+            <ComboBoxItem Content="Newton`s"/>
+        </ComboBox>
+
+        <TextBox x:Name="MaxIterations_TextBox" Margin="9,8" Grid.Row="1" Grid.Column="2" Visibility="Hidden"/>
+
     </Grid>
 </Window>
