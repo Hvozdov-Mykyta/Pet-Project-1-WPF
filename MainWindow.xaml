@@ -80,7 +80,7 @@
             </Grid.RowDefinitions>
 
             <TextBox x:Name="Left_TextBox" FontFamily="Bahnschrift" FontSize="12" Margin="0,5,0,5" Grid.Row="0"/>
-            <TextBox x:Name="RIght_TextBox" FontFamily="Bahnschrift" FontSize="12" Margin="0,5,0,5" Grid.Row="1"/>
+            <TextBox x:Name="Right_TextBox" FontFamily="Bahnschrift" FontSize="12" Margin="0,5,0,5" Grid.Row="1"/>
             <TextBox x:Name="Accuracy_TextBox" FontFamily="Bahnschrift" FontSize="12" Margin="0,5,0,5" Grid.Row="2"/>
             <TextBox x:Name="Root_TextBox" FontFamily="Bahnschrift" FontSize="12" Margin="0,5,0,5" Grid.Row="3"/>
             <TextBox x:Name="Iterations_TextBox" FontFamily="Bahnschrift" FontSize="12" Margin="0,5,0,5" Grid.Row="4"/>
@@ -99,7 +99,7 @@
             <ComboBoxItem Content="Newton`s"/>
         </ComboBox>
 
-        <TextBox x:Name="MaxIterations_TextBox" Margin="9,8" Grid.Row="1" Grid.Column="2" Visibility="Hidden"/>
+        <TextBox x:Name="MaxIterations_TextBox" Text="20" Margin="9,8" Grid.Row="1" Grid.Column="2" Visibility="Hidden"/>
 
     </Grid>
 </Window>
