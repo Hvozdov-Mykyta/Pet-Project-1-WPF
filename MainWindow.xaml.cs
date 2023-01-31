@@ -6,66 +6,89 @@ namespace Pet_Project_1_WPF
 {
     public partial class MainWindow : Window
     {
+        private RootSearchMethods RSM;
+        private ValidationOfInputData VID;
+
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Method_ComboBox.SelectedIndex = 0;
+            Function_ComboBox.SelectedIndex = 0;
+            RSM = new RootSearchMethods();
+            VID = new ValidationOfInputData();
         }
+
 
         private void Solve_Button_Click(object sender, RoutedEventArgs e)
         {
             double left, right, accuracy, result = 0;
-            int counter = 0, maxIterations;
+            int counter = 0, maxIterations = 0;
+            int methodNum = Method_ComboBox.SelectedIndex, functionNum = Function_ComboBox.SelectedIndex;
 
             try
             {
                 left = Convert.ToDouble(Left_TextBox.Text);
                 right = Convert.ToDouble(Right_TextBox.Text);
                 accuracy = Convert.ToDouble(Accuracy_TextBox.Text);
+                if(Method_ComboBox.SelectedIndex == 1)
+                    maxIterations = Convert.ToInt32(MaxIterations_TextBox.Text);
             }
-            catch (Exception err)
+            catch (Exception ex)
             {
-                MessageBox.Show(err.Message);
+                MessageBox.Show(ex.Message);
                 return;
             }
 
-            if (!CheckDataCorrectness(ref left, ref right, ref accuracy, counter))
+            VID.CheckAccuracyCorrectness(ref accuracy, ref Accuracy_TextBox);
+
+            if (VID.CheckBordersCorrectness(ref left, ref right, ref Left_TextBox, ref Right_TextBox))
                 return;
 
-            switch (Method_ComboBox.SelectedIndex)
+            if (VID.CheckIfBorderIsRoot(left, accuracy, functionNum, ref Root_TextBox, ref Iterations_TextBox))
+                return;
+
+            if (VID.CheckIfBorderIsRoot(right, accuracy, functionNum, ref Root_TextBox, ref Iterations_TextBox))
+                return;
+
+            switch (methodNum)
             {
                 case 0:
                     {
-                        if (RSM.Function(left) * RSM.Function(right) > 0)
-                        {
-                            MessageBox.Show("There is no SINGLE root on interval");
+                        if (VID.CheckForSingleRootOnInterval(left, right, functionNum))
                             return;
-                        }
-                        result = RSM.Halving(left, right, accuracy, ref counter);
+                        result = RSM.Halving(left, right, accuracy, ref counter, functionNum);
                     }
                     break;
                 case 1:
                     {
-                        try
+                        double point, derivateWidth = accuracy/100;
+                        if (VID.CheckConvergenceIsGuaranted(left, right, derivateWidth, functionNum, out point))
+                            return;
+                        result = RSM.Newton(point, accuracy, maxIterations, ref counter, functionNum, derivateWidth);
+                        if (counter == maxIterations)
                         {
-                            maxIterations = Convert.ToInt32(MaxIterations_TextBox.Text);
-                            result = RSM.Newton(left, right, accuracy, maxIterations, ref counter);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
+                            MessageBox.Show($"Root wasn`t found for {maxIterations} iterations");
                             return;
                         }
                     }
                     break;
             }
+            if (result is double.NaN)
+            {
+                MessageBox.Show("Unable to solve with actual input data");
+                return;
+            }
             Root_TextBox.Text = result.ToString();
             Iterations_TextBox.Text = counter.ToString();
         }
+
+
 
         private void Clear_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -74,6 +97,7 @@ namespace Pet_Project_1_WPF
             MaxIterations_TextBox.Clear();
         }
 
+
         private void Close_Button_Click(object sender, RoutedEventArgs e)
         {
             var response = MessageBox.Show("Close program?", "Close", MessageBoxButton.YesNo);
@@ -81,50 +105,10 @@ namespace Pet_Project_1_WPF
                 Close();
         }
 
+
         private void Method_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MaxIterations_TextBox.Visibility = Method_ComboBox.SelectedIndex == 1 ? Visibility.Visible : Visibility.Hidden;
         }
-
-
-        private bool CheckDataCorrectness(ref double left, ref double right, ref double accuracy, double counter)
-        {
-            if (accuracy < 1e-15 || accuracy > 1e-3)
-            {
-                accuracy = 1e-6;
-                Accuracy_TextBox.Text = accuracy.ToString();
-            }
-
-            if (left > right)
-            {
-                (right, left) = (left, right);
-                Left_TextBox.Text = left.ToString();
-                Right_TextBox.Text = right.ToString();
-            }
-
-            if (left == right)
-            {
-                MessageBox.Show("Left and right borders must be difference.");
-                return false;
-            }
-
-            if (Math.Abs(RSM.Function(left)) < accuracy)
-            {
-                Root_TextBox.Text = left.ToString();
-                Iterations_TextBox.Text = counter.ToString();
-                return false;
-            }
-
-            if (Math.Abs(RSM.Function(right)) < accuracy)
-            {
-                Root_TextBox.Text = right.ToString();
-                Iterations_TextBox.Text = counter.ToString();
-                return false;
-            }
-
-            return true;
-        }
-
-        private RootSearchMethods RSM = new RootSearchMethods();
     }
 }
