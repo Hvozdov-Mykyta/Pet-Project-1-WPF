@@ -2,7 +2,7 @@
 
 namespace Pet_Project_1_WPF
 {
-    internal class RootSearchMethods
+    public class RootSearchMethods
     {
         public double Halving(double left, double right, double accuracy, ref int counter)
         {

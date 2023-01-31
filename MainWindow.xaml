@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Pet_Project_1_WPF"
         mc:Ignorable="d"
         Title="Search Equation Root"
-        Height="230" Width="415" ResizeMode="NoResize">
+        Height="230" Width="415" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Grid x:Name="MainGrid" Background="white">
 
         <Grid.RowDefinitions>
@@ -94,7 +94,7 @@
 
         <ComboBox x:Name="Method_ComboBox" Margin="5,5,5,5" FontFamily="Bahnschrift" FontSize="12"
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1"  
-                  SelectedIndex="-1" SelectionChanged="Method_ComboBox_SelectionChanged">
+                  SelectionChanged="Method_ComboBox_SelectionChanged">
             <ComboBoxItem Content="Halving"/>
             <ComboBoxItem Content="Newton`s"/>
         </ComboBox>

@@ -9,12 +9,16 @@ namespace Pet_Project_1_WPF
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             Method_ComboBox.SelectedIndex = 0;
         }
 
         private void Solve_Button_Click(object sender, RoutedEventArgs e)
         {
-            double left, right, accuracy, result;
+            double left, right, accuracy, result = 0;
             int counter = 0, maxIterations;
 
             try
@@ -29,38 +33,8 @@ namespace Pet_Project_1_WPF
                 return;
             }
 
-            if (accuracy < 1e-15 || accuracy > 1e-3)
-            {
-                accuracy = 1e-6;
-                Accuracy_TextBox.Text = "1e-6";
-            }
-
-            if (left == right)
-            {
-                MessageBox.Show("Left and right borders must be difference.");
+            if (!CheckDataCorrectness(ref left, ref right, ref accuracy, counter))
                 return;
-            }
-
-            if (left > right)
-            {
-                (right, left) = (left, right);
-                Left_TextBox.Text = left.ToString();
-                Right_TextBox.Text = right.ToString();
-            }
-
-            if (Math.Abs(RSM.Function(left)) < accuracy)
-            {
-                Root_TextBox.Text = left.ToString();
-                Iterations_TextBox.Text = counter.ToString();
-                return;
-            }
-
-            if (Math.Abs(RSM.Function(right)) < accuracy)
-            {
-                Root_TextBox.Text = right.ToString();
-                Iterations_TextBox.Text = counter.ToString();
-                return;
-            }
 
             switch (Method_ComboBox.SelectedIndex)
             {
@@ -88,7 +62,6 @@ namespace Pet_Project_1_WPF
                         }
                     }
                     break;
-                default: return;
             }
             Root_TextBox.Text = result.ToString();
             Iterations_TextBox.Text = counter.ToString();
@@ -111,6 +84,45 @@ namespace Pet_Project_1_WPF
         private void Method_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MaxIterations_TextBox.Visibility = Method_ComboBox.SelectedIndex == 1 ? Visibility.Visible : Visibility.Hidden;
+        }
+
+
+        private bool CheckDataCorrectness(ref double left, ref double right, ref double accuracy, double counter)
+        {
+            if (accuracy < 1e-15 || accuracy > 1e-3)
+            {
+                accuracy = 1e-6;
+                Accuracy_TextBox.Text = accuracy.ToString();
+            }
+
+            if (left > right)
+            {
+                (right, left) = (left, right);
+                Left_TextBox.Text = left.ToString();
+                Right_TextBox.Text = right.ToString();
+            }
+
+            if (left == right)
+            {
+                MessageBox.Show("Left and right borders must be difference.");
+                return false;
+            }
+
+            if (Math.Abs(RSM.Function(left)) < accuracy)
+            {
+                Root_TextBox.Text = left.ToString();
+                Iterations_TextBox.Text = counter.ToString();
+                return false;
+            }
+
+            if (Math.Abs(RSM.Function(right)) < accuracy)
+            {
+                Root_TextBox.Text = right.ToString();
+                Iterations_TextBox.Text = counter.ToString();
+                return false;
+            }
+
+            return true;
         }
 
         private RootSearchMethods RSM = new RootSearchMethods();
