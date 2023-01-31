@@ -10,7 +10,7 @@ namespace Pet_Project_1_WPF
             {
                 case 0: return x * x - 4;
                 case 1: return Math.Pow((x - 2), 3) + 5;
-                default: throw new Exception("Function number out of functions list");
+                default: throw new Exception("Function number out of range");
             }
         }
 
