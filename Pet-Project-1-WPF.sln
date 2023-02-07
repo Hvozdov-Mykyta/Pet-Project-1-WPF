@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pet-Project-1-WPF", "Pet-Project-1-WPF.csproj", "{4CDACAD5-C6DC-4828-9910-C941992C47B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pet-Project-1-WPF-Tests", "..\Pet-Project-1-WPF-Tests\Pet-Project-1-WPF-Tests.csproj", "{6B8C3C86-6E87-4DD4-A660-029A0F6770E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4CDACAD5-C6DC-4828-9910-C941992C47B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CDACAD5-C6DC-4828-9910-C941992C47B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CDACAD5-C6DC-4828-9910-C941992C47B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B8C3C86-6E87-4DD4-A660-029A0F6770E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B8C3C86-6E87-4DD4-A660-029A0F6770E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B8C3C86-6E87-4DD4-A660-029A0F6770E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B8C3C86-6E87-4DD4-A660-029A0F6770E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
