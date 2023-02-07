@@ -20,10 +20,7 @@ namespace Pet_Project_1_WPF
         public bool CheckBordersCorrectness(ref double left, ref double right, ref TextBox leftTextBox, ref TextBox rightTextBox)
         {
             if (left == right)
-            {
-                MessageBox.Show("Left and right borders must be difference.");
                 return true;
-            }
 
             if (left > right)
             {
@@ -49,11 +46,9 @@ namespace Pet_Project_1_WPF
         public bool CheckForSingleRootOnInterval(double left, double right, int funcNum)
         {
             if (F.Function(left, funcNum) * F.Function(right, funcNum) > 0)
-            {
-                MessageBox.Show("There is no SINGLE root on interval");
                 return true;
-            }
-            return false;
+            else
+                return false;
         }
 
         public bool CheckConvergenceIsGuaranted(double left, double right, double derivateWidth, int funcNum, out double point)
@@ -62,7 +57,6 @@ namespace Pet_Project_1_WPF
             {
                 if (F.Function(right, funcNum) * F.SecondDerivate(right, derivateWidth, funcNum) < 0)
                 {
-                    MessageBox.Show("Convergence of iterations is not guaranted");
                     point = 0;
                     return true;
                 }

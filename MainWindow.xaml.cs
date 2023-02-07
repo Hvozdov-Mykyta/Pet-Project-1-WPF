@@ -48,7 +48,10 @@ namespace Pet_Project_1_WPF
             VID.CheckAccuracyCorrectness(ref accuracy, ref Accuracy_TextBox);
 
             if (VID.CheckBordersCorrectness(ref left, ref right, ref Left_TextBox, ref Right_TextBox))
+            {
+                MessageBox.Show("Left and right borders must be difference.");
                 return;
+            }
 
             if (VID.CheckIfBorderIsRoot(left, accuracy, functionNum, ref Root_TextBox, ref Iterations_TextBox))
                 return;
@@ -61,7 +64,10 @@ namespace Pet_Project_1_WPF
                 case 0:
                     {
                         if (VID.CheckForSingleRootOnInterval(left, right, functionNum))
+                        {
+                            MessageBox.Show("There is no SINGLE root on interval");
                             return;
+                        }
                         result = RSM.Halving(left, right, accuracy, ref counter, functionNum);
                     }
                     break;
@@ -69,7 +75,10 @@ namespace Pet_Project_1_WPF
                     {
                         double point, derivateWidth = accuracy/100;
                         if (VID.CheckConvergenceIsGuaranted(left, right, derivateWidth, functionNum, out point))
+                        {
+                            MessageBox.Show("Convergence of iterations is not guaranted");
                             return;
+                        }
                         result = RSM.Newton(point, accuracy, maxIterations, ref counter, functionNum, derivateWidth);
                         if (counter == maxIterations)
                         {
